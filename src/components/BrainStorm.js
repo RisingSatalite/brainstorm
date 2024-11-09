@@ -313,16 +313,19 @@ const Brainstorm = () => {
         </select>
         <button className="bg-slate-400" onClick={addNode}>Add Node</button>
         <br/>
-        <select value={selectedElement} onChange={setingSelectedElement}>
-            <option value="" disabled>
-            Select a node
-            </option>
-            {elementsHolder.map((item, index) => (
-            <option key={index} value={item.data.id}>
-                {item.data.id}
-            </option>
-            ))}
-        </select>
+        <Select
+            value={elementsHolder.find((item) => item.data.id === targetSelectedElement)}
+            onChange={(selectedOption) => setSelectedElement(selectedOption.data.id)}
+            options={elementsHolder.map((item) => ({
+            ...item, // Spread the original item data
+            value: item.data.id,
+            label: item.data.id,
+            }))}
+            placeholder="Select a node"
+            isSearchable
+            getOptionValue={(option) => option.data.id}  // Use the original `data.id` as the value
+            getOptionLabel={(option) => option.data.id}  // Display the `data.id` as the label
+        />
         {selectedElement && (
             <div>
             <button className="bg-slate-400" onClick={deleteNode}>Delete Node</button>
