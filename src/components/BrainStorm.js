@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import DrawingBoard from './DrawingBoard';
 
 //Export libraries
@@ -8,7 +9,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 const Brainstorm = () => {
-  const [graphType, setGraphType] = useState("concentric");
+  const [graphType, setGraphType] = useState("cose");
   const possibleGraphTypes = ["cose", "grid", "concentric", "circle", "avsdf", "klay"];
 
   const [imageHolder, setImageHolder] = useState(null)
