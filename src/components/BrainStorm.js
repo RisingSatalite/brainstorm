@@ -8,7 +8,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 const Brainstorm = () => {
-  const [graphType, setGraphType] = useState("circle");
+  const [graphType, setGraphType] = useState("concentric");
   const possibleGraphTypes = ["cose", "grid", "concentric", "circle", "avsdf", "klay"];
 
   const [imageHolder, setImageHolder] = useState(null)
@@ -286,67 +286,69 @@ const Brainstorm = () => {
 
   return (
     <div>
-      <input
-        type="file"
-        accept=".ndv"
-        onChange={uploadData}
-        style={{ display: 'none' }}
-        id="fileInput"
-      />
-      <button onClick={() => document.getElementById('fileInput').click()}>Upload data</button>
-      <button onClick={downloadData}>Download data</button>
-      <button onClick={exportImage}>Download PNG image</button>
-      <button onClick={exportSVG}>Download SVG image</button>
-      <br/>
-      <span className="bg-slate-400">Controller</span>
-      <select value={graphType} onChange={handleGraphChange}>
-        <option value="" disabled>
-          Choose an display layout
-        </option>
-        {possibleGraphTypes.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      <button className="bg-slate-400" onClick={addNode}>Add Node</button>
-      <br/>
-      <select value={selectedElement} onChange={setingSelectedElement}>
-        <option value="" disabled>
-          Select a node
-        </option>
-        {elementsHolder.map((item, index) => (
-        <option key={index} value={item.data.id}>
-            {item.data.id}
-        </option>
-        ))}
-      </select>
-      {selectedElement && (
         <div>
-          <button className="bg-slate-400" onClick={deleteNode}>Delete Node</button>
-          <input
-            className="bg-stone-300"
-            value={selectedElement}
-            onChange={handleIdChange}
-          />
-          <select value={targetSelectedElement} onChange={(e) => setTargetSelectedElement(e.target.value)}>
+        <input
+            type="file"
+            accept=".ndv"
+            onChange={uploadData}
+            style={{ display: 'none' }}
+            id="fileInput"
+        />
+        <button onClick={() => document.getElementById('fileInput').click()}>Upload data</button>
+        <button onClick={downloadData}>Download data</button>
+        <button onClick={exportImage}>Download PNG image</button>
+        <button onClick={exportSVG}>Download SVG image</button>
+        <br/>
+        <span className="bg-slate-400">Controller</span>
+        <select value={graphType} onChange={handleGraphChange}>
             <option value="" disabled>
-              Select a node
+            Choose an display layout
+            </option>
+            {possibleGraphTypes.map((item, index) => (
+            <option key={index} value={item}>
+                {item}
+            </option>
+            ))}
+        </select>
+        <button className="bg-slate-400" onClick={addNode}>Add Node</button>
+        <br/>
+        <select value={selectedElement} onChange={setingSelectedElement}>
+            <option value="" disabled>
+            Select a node
             </option>
             {elementsHolder.map((item, index) => (
             <option key={index} value={item.data.id}>
                 {item.data.id}
             </option>
             ))}
-          </select>
-          <button onClick={addNewElementLink}>Link</button><button onClick={removeElementLink}>Delete Links</button>
-          <div>
-            <input type="file" id="backgroundImageInput" name="file" onClick={(e) => setImageHolder(e.target.value)}/>
-            <button onClick={addStyle}>Set image background</button>
-          </div>
+        </select>
+        {selectedElement && (
+            <div>
+            <button className="bg-slate-400" onClick={deleteNode}>Delete Node</button>
+            <input
+                className="bg-stone-300"
+                value={selectedElement}
+                onChange={handleIdChange}
+            />
+            <select value={targetSelectedElement} onChange={(e) => setTargetSelectedElement(e.target.value)}>
+                <option value="" disabled>
+                Select a node
+                </option>
+                {elementsHolder.map((item, index) => (
+                <option key={index} value={item.data.id}>
+                    {item.data.id}
+                </option>
+                ))}
+            </select>
+            <button onClick={addNewElementLink}>Link</button><button onClick={removeElementLink}>Delete Links</button>
+            <div>
+                <input type="file" id="backgroundImageInput" name="file" onClick={(e) => setImageHolder(e.target.value)}/>
+                <button onClick={addStyle}>Set image background</button>
+            </div>
+            </div>
+        )}
         </div>
-      )}
-      <ConspiracyBoard elementsHolder={allElements} graphType={graphType} style={nodeStyle}/>
+        <DrawingBoard elementsHolder={allElements} graphType={graphType} style={nodeStyle}/>
     </div>
   );
 };
