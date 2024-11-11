@@ -9,7 +9,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 const Brainstorm = () => {
-    const [graphType, setGraphType] = useState("circle");
+    const [graphType, setGraphType] = useState("cose");
     const possibleGraphTypes = ["cose", "grid", "concentric", "circle", "avsdf", "klay"];
   
     const [imageHolder, setImageHolder] = useState(null)
