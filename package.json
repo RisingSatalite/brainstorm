@@ -11,12 +11,15 @@
   "dependencies": {
     "cytoscape": "^3.30.3",
     "cytoscape-avsdf": "^1.0.0",
+    "cytoscape-cola": "^2.5.1",
     "cytoscape-klay": "^3.1.4",
+    "cytoscape-spread": "^3.0.0",
+    "cytoscape-springy": "^1.4.2",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-select": "^5.8.3"
   },
   "devDependencies": {

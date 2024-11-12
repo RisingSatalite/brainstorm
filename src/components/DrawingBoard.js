@@ -4,32 +4,35 @@ import React, { useEffect, useRef } from 'react';
 import cytoscape from 'cytoscape';
 import avsdf from 'cytoscape-avsdf';
 import klay from 'cytoscape-klay';
- 
-const DrawingBoard = (
-  { elementsHolder, 
-    graphType="circle", 
-    style=[
-  {
-    selector: 'node',
-    style: {
-      'background-color': '#666',
-      label: 'data(id)',
+import cola from 'cytoscape-cola';
+
+const DrawingBoard = ({
+  elementsHolder,
+  graphType = "cose",
+  style = [
+    {
+      selector: 'node',
+      style: {
+        'background-color': '#666',
+        label: 'data(id)',
+      },
     },
-  },
-  {
-    selector: 'edge',
-    style: {
-      width: 3,
-      'line-color': '#ccc',
-      'target-arrow-color': '#ccc',
-      'target-arrow-shape': 'triangle',
+    {
+      selector: 'edge',
+      style: {
+        width: 3,
+        'line-color': '#ccc',
+        'target-arrow-color': '#ccc',
+        'target-arrow-shape': 'triangle',
+      },
     },
-  },
-] }) => {
+  ]
+}) => {
   const cyRef = useRef(null);
 
-  cytoscape.use( avsdf );
-  cytoscape.use( klay );
+  cytoscape.use(avsdf);
+  cytoscape.use(klay);
+  cytoscape.use(cola);
 
   useEffect(() => {
     if (cyRef.current) {
@@ -44,6 +47,11 @@ const DrawingBoard = (
         name: graphType,
         rows: 5,
       },
+    });
+
+    // Add drag event listener for dynamic layout adjustment
+    cyRef.current.on('dragfree', 'node', () => {
+      cyRef.current.layout({ name: graphType, animate: 'end', fit: true }).run();
     });
 
     return () => {
