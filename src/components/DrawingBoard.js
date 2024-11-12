@@ -6,6 +6,8 @@ import avsdf from 'cytoscape-avsdf';
 import klay from 'cytoscape-klay';
 import cola from 'cytoscape-cola';
 
+var autoAlign = true
+
 const DrawingBoard = ({
   elementsHolder,
   graphType = "cose",
@@ -51,7 +53,9 @@ const DrawingBoard = ({
 
     // Add drag event listener for dynamic layout adjustment
     cyRef.current.on('dragfree', 'node', () => {
-      cyRef.current.layout({ name: graphType, animate: 'end', fit: true }).run();
+      if(autoAlign){
+        cyRef.current.layout({ name: graphType, animate: 'end', fit: true }).run();
+      }
     });
 
     return () => {
